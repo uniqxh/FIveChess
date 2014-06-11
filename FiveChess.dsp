@@ -94,6 +94,10 @@ SOURCE=.\Board.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Connection.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\FiveChess.cpp
 # End Source File
 # Begin Source File
@@ -103,6 +107,14 @@ SOURCE=.\FiveChess.rc
 # Begin Source File
 
 SOURCE=.\FiveChessDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\rule.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\set_dlg.cpp
 # End Source File
 # Begin Source File
 
@@ -119,6 +131,10 @@ SOURCE=.\Board.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\Connection.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\FiveChess.h
 # End Source File
 # Begin Source File
@@ -128,6 +144,22 @@ SOURCE=.\FiveChessDlg.h
 # Begin Source File
 
 SOURCE=.\Resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\rule.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\set_dlg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\SkinPPWTL.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\sockdata.h
 # End Source File
 # Begin Source File
 
@@ -160,7 +192,27 @@ SOURCE=.\res\White.bmp
 # End Group
 # Begin Source File
 
+SOURCE=.\AquaOS.ssk
+# End Source File
+# Begin Source File
+
+SOURCE=.\bOzen.ssk
+# End Source File
+# Begin Source File
+
+SOURCE=.\default.ssk
+# End Source File
+# Begin Source File
+
 SOURCE=.\ReadMe.txt
+# End Source File
+# Begin Source File
+
+SOURCE=.\SkinPPWTL.dll
+# End Source File
+# Begin Source File
+
+SOURCE=.\SkinPPWTL.lib
 # End Source File
 # End Target
 # End Project

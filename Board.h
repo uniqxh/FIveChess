@@ -29,6 +29,15 @@ public:
 
 // Implementation
 public:
+	void DrawGame();
+	void RestoreWait();
+	void Over( int x, int y );
+	void Receive();
+	void Draw(int x,int y,int color);
+	void SetData(int x,int y,int color);
+	void SetWait(BOOL Wait);
+	int GetColor() const;
+	void SetColor(int Color);
 	void Clear( BOOL bWait );
 	virtual ~CBoard();
 
@@ -37,6 +46,7 @@ protected:
 	//{{AFX_MSG(CBoard)
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnPaint();
+	afx_msg void OnRestart();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 private:

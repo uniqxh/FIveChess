@@ -4,7 +4,9 @@
 #include "stdafx.h"
 #include "FiveChess.h"
 #include "FiveChessDlg.h"
-//#include "AboutDlg.h"
+#include "set_dlg.h"
+#include "Connection.h"
+#include "sockdata.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -83,6 +85,9 @@ BEGIN_MESSAGE_MAP(CFiveChessDlg, CDialog)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_COMMAND(ID_NEW_GAME, OnNewGame)
+	ON_COMMAND(ID_EXIT_GAME, OnExitGame)
+	ON_COMMAND(ID_DRAW_GAME, OnDrawGame)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -124,7 +129,7 @@ BOOL CFiveChessDlg::OnInitDialog()
 
 	m_board.Clear( TRUE );
 
-	//GetDlgItem( IDC_BOARD )->SetFocus();
+	GetDlgItem( IDC_BOARD )->SetFocus();
 	
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -178,3 +183,70 @@ HCURSOR CFiveChessDlg::OnQueryDragIcon()
 	return (HCURSOR) m_hIcon;
 }
 
+
+void CFiveChessDlg::OnNewGame() 
+{
+	// TODO: Add your command handler code here
+	if(IDOK==set_dlg.DoModal())
+	{
+		restart();
+		NewGame(set_dlg.m_is_host);
+	}
+}
+
+void CFiveChessDlg::OnExitGame() 
+{
+	// TODO: Add your command handler code here
+	SetMenu(NULL);
+	CDialog::OnCancel();
+}
+
+void CFiveChessDlg::Accept()
+{
+	m_con.Accept(m_sock);
+	m_is_con = 1;
+	m_board.SetColor(BLACK);
+	m_board.Clear(false);
+	MessageBox(_T("连接成功，开始游戏。"),_T("五子棋"),MB_ICONINFORMATION);
+}
+
+void CFiveChessDlg::connect()
+{
+	m_is_con = 1;
+	m_board.SetColor(WHITE);
+	m_board.Clear(false);
+	MessageBox(_T("连接成功，开始游戏。"),_T("五子棋"),MB_ICONINFORMATION);
+}
+
+void CFiveChessDlg::send(msg_data *m_msg_data)
+{
+	m_sock.Send((LPVOID)m_msg_data,sizeof(msg_data));
+}
+
+void CFiveChessDlg::restart()
+{
+	m_con.Close();
+	m_sock.Close();
+}
+
+void CFiveChessDlg::NewGame(BOOL isHost)
+{
+	if(isHost)
+	{
+		m_con.Create(atoi(set_dlg.m_port));
+		m_con.Listen();
+	}
+	else{
+		m_sock.Create();
+		m_sock.Connect(set_dlg.m_host_ip,atoi(set_dlg.m_port));
+	}
+}
+
+void CFiveChessDlg::OnDrawGame() 
+{
+	// TODO: Add your command handler code here
+	if(m_is_con)
+	{
+		m_board.DrawGame();
+	}
+}

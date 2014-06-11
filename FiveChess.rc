@@ -84,13 +84,31 @@ BEGIN
     DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
 END
 
-IDD_FIVECHESS_DIALOG DIALOGEX 0, 0, 266, 311
+IDD_FIVECHESS_DIALOG DIALOGEX 0, 0, 262, 312
 STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "FiveChess"
 MENU IDR_MAIN_MENU
 FONT 9, "宋体"
 BEGIN
+END
+
+IDD_set_dlg DIALOG DISCARDABLE  0, 0, 222, 155
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "网络设置"
+FONT 10, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,38,110,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,132,110,50,14
+    CONTROL         "主  机",IDC_host,"Button",BS_AUTORADIOBUTTON,38,22,68,
+                    16
+    CONTROL         "客户机",IDC_client,"Button",BS_AUTORADIOBUTTON,115,22,
+                    68,16
+    CONTROL         "IPAddress1",IDC_ip,"SysIPAddress32",WS_TABSTOP,67,46,
+                    112,16
+    RTEXT           "IP: ",IDC_STATIC,13,46,43,16,SS_CENTERIMAGE
+    RTEXT           "端口: ",IDC_STATIC,13,75,43,16,SS_CENTERIMAGE
+    EDITTEXT        IDC_port,67,75,54,16,ES_AUTOHSCROLL
 END
 
 
@@ -155,10 +173,16 @@ BEGIN
 
     IDD_FIVECHESS_DIALOG, DIALOG
     BEGIN
+        RIGHTMARGIN, 260
+        BOTTOMMARGIN, 311
+    END
+
+    IDD_set_dlg, DIALOG
+    BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 259
+        RIGHTMARGIN, 215
         TOPMARGIN, 7
-        BOTTOMMARGIN, 304
+        BOTTOMMARGIN, 148
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -182,8 +206,9 @@ IDR_MAIN_MENU MENU DISCARDABLE
 BEGIN
     POPUP "操       作"
     BEGIN
-        MENUITEM "新  游 戏",                   ID_NEW_GAME
-        MENUITEM "和      棋",                  ID_DRAW_GAME
+        MENUITEM "新 游 戏",                    ID_NEW_GAME
+        MENUITEM "和    棋",                    ID_DRAW_GAME
+        MENUITEM "重新游戏",                    ID_RESTART
         MENUITEM "退出游戏",                    ID_EXIT_GAME
     END
 END
